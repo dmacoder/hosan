@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.cafe24.hosan.mapper.MemberMapper">
+
+<sql id="search">
+		<choose>
+			<when test="searchType == null or searchType == '' or keyword == null or keyword == ''">
+
+			</when>
+			<otherwise>
+				<if test="searchType == 'e'.toString()">
+					and email_address like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%')
+				</if>
+				<if test="searchType == 'n'.toString()">
+					and user_name like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%')
+				</if>
+				<if test="searchType == 'i'.toString()">
+					and user_id like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%')
+				</if>
+			</otherwise>
+		</choose>
+	</sql>
+	
+	
+	<insert id="insert" parameterType="com.cafe24.hosan.member.domain.MemberVO">
+ 		
+ 		insert into hosan_member (member_srl,member_type,user_id,email_address,password,salt,email_id,email_host,user_name,
+find_account_question,find_account_answer,birthday,allow_mailing,allow_message,gender,address,mobile,
+career,career_history,license_date,license_provider,license_description,
+company_name,company_number,regdate,denied,limit_date,is_admin,change_password_date,profile_img_path,member_grade,last_login)
+values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{password},#{salt},#{email_id},#{email_host},#{user_name},
+#{find_account_question},#{find_account_answer},#{birthday},#{allow_mailing},#{allow_message},#{gender},#{address},#{mobile},
+#{career,jdbcType=VARCHAR},#{career_history,jdbcType=VARCHAR},#{license_date,jdbcType=VARCHAR},#{license_provider,jdbcType=VARCHAR},#{license_description,jdbcType=VARCHAR},
+#{company_name,jdbcType=VARCHAR},#{company_number,jdbcType=VARCHAR},#{regdate},#{denied},#{limit_date,jdbcType=DATE},#{is_admin},#{change_password_date},#{profile_img_path,jdbcType=VARCHAR},#{member_grade},#{last_login})
+ 		
+ 	</insert>
+ 	
+ 	<!-- 회원가입 아이디 확인 -->
+ 	<select id="hasId" resultType="Integer">
+ 		select count(*) from hosan_member where user_id=#{0}
+ 	</select>
+ 	<!-- 이메일 중복 체크 -->
+ 	 <select id="hasEmail" resultType="Integer">
+ 		select count(*) from hosan_member where email_address=#{0}
+ 	</select>
+ 	
+ 	<!-- 아이디 찾기시 (이름과 이메일로)-->
+ 	<select id="hasIdByNameAndEmail" resultType="Integer">
+ 	select count(*) from hosan_member where user_name=#{user_name} and email_address=#{email_address}
+ 	</select>
+ 	
+ 	<select id="login" resultType="com.cafe24.hosan.member.domain.MemberVO">
+ 		select * from hosan_member where user_id=#{user_id} and password=#{password}
+ 	</select>
+ 	
+ 	<!-- 로그인 유지 -->
+	<update id="keepLogin">
+	update hosan_member
+	set session_key = #{sessionKey}
+	   ,session_limit = #{next}
+	where member_srl = #{member_srl}
+	</update>
+	
+ 	<!-- 세션키 체크 -->
+	<select id="checkSessionKey" resultType="MemberVO">
+	<![CDATA[  
+	select user_id,Session_Key sessionKey
+	from hosan_member
+	where Session_Key = #{value}
+	  and Session_Limit > sysdate
+	  ]]>
+	</select>
+ 	
+ 	<select id="isValidAuthKey" resultType="Integer">
+ 		select count(*) from hosan_member_auth_mail where auth_key=#{auth_key} and user_id=#{user_id} and password=#{password}
+ 	</select>
+ 	
+ 	<select id="isValidAuthKeyWithoutPassword" resultType="Integer">
+ 		select count(*) from hosan_member_auth_mail where auth_key=#{auth_key} and user_id=#{user_id}
+ 	</select>
+ 	
+ 	<!-- 이메일 변경 -->
+ 	
+ 	<update id="updateIsRegisterWithoutPassword">
+ 		update hosan_member_auth_mail set is_register=#{is_register} where auth_key=#{auth_key} and user_id=#{user_id}
+ 	</update>
+ 	
+ 	<!-- 이메일 인증후 인증 flag 변경 -->
+ 	<update id="updateIsRegister">
+ 	
+ 	update hosan_member_auth_mail set is_register=#{is_register} where auth_key=#{auth_key} and user_id=#{user_id} and password=#{password}
+ 	
+	</update>
+	
+	<update id="mergeAuthKey">
+	
+	merge into hosan_member_auth_mail m using dual d on (user_id = #{user_id})  
+								when matched then  
+								    update set auth_key=#{auth_key},password=#{password},is_register=#{is_register},regdate=#{regdate}
+								when not matched then
+								    insert (auth_key,user_id,password,is_register,regdate) values (#{auth_key},#{user_id},#{password},#{is_register},#{regdate})
+		
+	</update>
+	
+	<select id="getSaltById" resultType="String">
+		select salt from hosan_member where user_id=#{user_id}
+	</select>
+
+	<select id="confirmIdPassword" resultType="Integer" parameterType="com.cafe24.hosan.member.dto.LoginDTO">
+		
+		select count(*) from hosan_member where user_id=#{user_id} and password=#{password}
+		
+	</select>
+	
+
+	<!-- 나의 정보 수정 -->
+	
+	<update id="updateMyInfo">
+	
+	update hosan_member
+	set 
+	find_account_answer = #{find_account_answer},
+	find_account_question = #{find_account_question},
+	user_name = #{user_name},
+	gender = #{gender},
+	birthday = #{birthday},
+	address = #{address},
+	allow_mailing = #{allow_mailing},
+	allow_message = #{allow_message},
+	mobile = #{mobile}
+	where user_id = #{user_id}
+	</update>
+
+	
+	<!-- 프로필 사진 업데이트 -->
+	<update id="uploadPicture">
+	update hosan_member
+	set profile_img_path = #{profile_img_path}
+	where user_id = #{user_id}
+	</update>
+	
+	<!-- 회원 프로필 정보 수정 -->
+	<update id="updateDefaultProfile">
+	update hosan_member
+	set 
+	find_account_answer = #{find_account_answer},
+	find_account_question = #{find_account_question},
+	user_name = #{user_name},
+	gender = #{gender},
+	birthday = #{birthday},
+	address = #{address},
+	allow_mailing = #{allow_mailing},
+	allow_message = #{allow_message},
+	mobile = #{mobile},
+	birthday = #{birthday},
+	
+	career = #{career},
+	career_history = #{career_history},
+
+	license_date = #{license_date},
+	license_provider = #{license_provider},
+	license_description = #{license_description},
+	
+	company_name = #{company_name},
+	company_number =#{company_number}
+	
+	where user_id = #{user_id}
+	</update>
+	
+	<!-- 이메일 변경 -->
+	<update id="updateEmail">
+	update hosan_member set 
+	email_address = #{email_address} , email_id = #{email_id} , 
+	email_host = #{email_host} where user_id = #{user_id}
+	</update>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePassword">
+	update hosan_member set password = #{newPassword} , salt= #{salt} 
+	 where user_id = #{user_id} and password = #{password}
+	</update>
+	
+	<!-- 비밀번호 찾기후 비밀번호 변경 -->
+	<update id="updatePasswordWithoutPrevPassword">
+	update hosan_member set password = #{newPassword} , salt= #{salt} where user_id = #{user_id}
+	</update>
+ 	
+ 	<!-- 아이디 찾기 * 힌트 -->
+ 	<select id="getAsteriskIdByNameAndEmail" resultType="String">
+ 	select getAsteriskName(user_id) from hosan_member where user_name=#{user_name} and email_address=#{email_address}
+ 	</select>
+ 	
+ 	<!-- 이메일로 회원정보 가져오기 -->
+ 	<select id="getUserInfoByEmail" resultType="MemberVO">
+ 	select * from hosan_member WHERE email_address=#{email_address}
+ 	</select>
+ 	
+ 	<!-- 사용자 아이디로 프로필 사진 경로 가져오기  -->
+	<select id="selectProfileImgByUserId" resultType = "MemberVO">
+	select profile_img_path	 
+	from hosan_member
+	where user_id = #{user_id}
+	</select>	
+	
+	<select id="getUserInfoById" resultType="MemberVO">
+ 	select *		 
+	from hosan_member
+	where user_id = #{user_id}
+ 	</select>
+ 	
+ 	
+ 	<!-- 회원탈퇴 -->
+ 	<delete id="deleteMember">
+ 	DELETE hosan_member WHERE user_id=#{user_id}
+ 	</delete>
+ 	
+ 	
+ 	<!-- 아이디로 회원번호 가져오기 -->
+ 	<select id="getMemberSrlById" resultType="String">
+ 		select member_srl from hosan_member where user_id=#{user_id} 
+ 	</select>
+ 	
+ 	
+ 	<!-- 회원 검색이나 회원정보보기를 위한 회원 리스트 가져오기 -->
+	<select id="getSearchMemberList" resultType="com.cafe24.hosan.member.dto.MemberDTO">
+<![CDATA[  
+SELECT * FROM (SELECT Tb.*, rownum rNum FROM ( Select M.* from hosan_member M where member_srl > 0 
+]]>
+
+		<choose>
+			<when test="user_id == null or user_id == ''">
+
+			</when>
+			<otherwise>
+				AND user_id = #{user_id,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="member_srl == null or member_srl == ''">
+
+			</when>
+			<otherwise>
+				AND member_srl = #{member_srl,jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="user_name == null or user_name == ''">
+
+			</when>
+			<otherwise>
+				AND user_name = #{user_name,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="email_address == null or email_address == ''">
+
+			</when>
+			<otherwise>
+				AND email_address = #{email_address,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+
+		<include refid="search"></include>
+  
+	<![CDATA[    
+	  ORDER BY member_srl DESC ) Tb ) WHERE rNum Between #{pageStart} and #{pageEnd}
+	]]>
+
+	</select>
+
+
+	<!-- 페이징 처리용 total count -->
+	<select id="getTotalMemberCount" resultType="Integer">
+	
+	<![CDATA[  
+		select count(*) from hosan_member
+		  where member_srl > 0 
+	]]>
+
+		<choose>
+			<when test="user_id == null or user_id == ''">
+
+			</when>
+			<otherwise>
+				AND user_id = #{user_id,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="user_name == null or user_name == ''">
+
+			</when>
+			<otherwise>
+				AND user_name = #{user_name,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="email_address == null or email_address == ''">
+
+			</when>
+			<otherwise>
+				AND email_address = #{email_address,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+
+		<include refid="search"></include>
+
+	</select>
+ 	
+ </mapper>

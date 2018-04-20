@@ -1,0 +1,185 @@
+@charset "UTF-8";
+
+/* 공통된 탑1 부분 */
+
+#navbar-fixed-top {
+	background-color: #27cea7;
+	/* background-color: #41AF39; 네이버색생*/
+	height: 60px;
+	padding-top: 7px;
+	padding-right: 10px;
+	z-index: 200;
+}
+
+#navbar-brand {
+	color: #353535;
+	font-weight: bold;
+	font-size: 1.4em;
+}
+
+#navbar-brand>b {
+	color: #353535;
+	font-weight: bold;
+	font-size: 1.8em;
+}
+
+#form-control {
+	border: 0px;
+	border-radius: 0px;
+	height: 32px;
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
+#btn-default {
+	border: 0px;
+	border-radius: 0px;
+	height: 32px;
+}
+
+#navbar-nav>li>ul{
+	display: none;
+}
+
+#navbar-nav>li:hover ul{
+	display: block;
+}
+
+#navbar-nav>li>a {
+	color: #353535;
+	font-weight: 900;
+	font-size: 1em;
+}
+
+#navbar-nav>li>a:hover{
+	color: white;
+	font-weight: 900;
+	font-size: 1.1em;
+	
+}
+
+#navbar-nav>li>a:first-child{
+	background-color: transparent;
+}
+
+
+
+#dropdown-menu{
+	z-index: 180;
+}
+
+#dropdown-menu>li>a:hover, #dropdown-menu>li>a:active{
+	color: white; /* 드롭다운 글자색 통일하기 옆의 색으로 */
+	font-weight: bold;
+	font-size: 1.1em;
+	background-color: #27cea7;
+}
+.nav-up {
+	top: -100px; /* 네비게이션이랑 높이 같게 */
+}
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                      아이디 클릭시 팦메뉴 나오기 (시작)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/* Popup container - can be anything you want */
+.popup {
+    position: absolute;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 130px;
+    background-color: #27CEA7;
+    text-align: center;
+    border-radius: 4px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+.popuptext>a {
+	color: white;
+}
+.popuptext>a:hover {
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #27CEA7 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                      아이디 클릭시 팦메뉴 나오기  (끝)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+.id-image {
+	width: 35px;
+	height: 35px;
+	/* overflow: hidden; */
+	border-radius: 30px;
+	border: 1px solid #c0c0c0;
+	background-size: cover;
+	background-position: center;
+	float: left;
+	top: -5px;
+	position: relative;
+}
+
+.size-up{
+	min-width: 145px;
+	max-width: 170px;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

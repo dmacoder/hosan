@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+/* 공통된 탑2 부분 */
+
+#navbar-fixed-top2 {
+	margin-top: 60px;
+	height: 40px;
+	background-color: white;
+	border-bottom: 1px solid #E1E1E1;
+	height: 40px;
+	z-index: 190;
+}
+
+#navbar-nav2>li>a {
+	color: #636363;
+	font-weight: bold;
+	font-size: 1em;
+}
+
+#navbar-nav2>li>a:hover{
+	color: #27cea7;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+#navbar-nav2>li>a:first-child{
+	background-color: transparent;
+}
+
+#navbar-nav2 li ul{
+	display: none;
+	
+}
+#navbar-nav2 li:hover ul{
+	display: block;
+}
+
+.navbar-nav3>li>a:hover, .navbar-nav3>li>a:active{
+	color: white; /* 드롭다운 글자색 통일하기 옆의 색으로 */
+	font-weight: bold;
+	font-size: 1.1em;
+	background-color: #27cea7;
+}
+
+.nav-up {
+	top: -100px; /* 네비게이션이랑 높이 같게 */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

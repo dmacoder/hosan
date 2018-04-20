@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!-- 자동 CamelCase 변환 -->
+ <settings> 
+    <setting name="mapUnderscoreToCamelCase" value="true"/>
+ </settings> 
+
+  <typeAliases>
+    <package name="com.cafe24.hosan.member.domain"/>
+    <package name="com.cafe24.hosan.board.domain"/>
+    <package name="com.cafe24.hosan.faq.domain"/>
+    <package name="com.cafe24.hosan.notice.domain"/>
+    <package name="com.cafe24.hosan.comment.domain"/>
+    <package name="com.cafe24.hosan.message.domain"/>
+    <package name="com.cafe24.hosan.like.domain"/>
+    <package name="com.cafe24.hosan.document.domain"/>
+    
+    <package name="com.cafe24.hosan.member.dto"/>
+    <package name="com.cafe24.hosan.board.dto"/>
+  </typeAliases>
+
+</configuration>
+

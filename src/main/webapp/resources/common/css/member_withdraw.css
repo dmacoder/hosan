@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+/* 회원탈퇴1단계 부분 */
+
+#row-body-withdraw {
+	margin-top: 100px;
+	background-color: #FAFAFA;
+	padding-top: 45px;
+	padding-bottom: 45px;
+}
+
+#profile-menu>h3 {
+	color: #4d4d4d;
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-top: 0px;
+	margin-bottom: 25px;
+}
+
+#profile-menu>a>p {
+	color: #8C8C8C;
+	font-weight: bold;
+	font-size: 1.1em;
+	margin-bottom: 20px;
+}
+
+#join {
+	background-color: #FAFAFA;
+}
+
+.well-lg {
+	background-color: white;
+	width: 100%;
+}
+
+#withdraw_wrap>h3 {
+	color: #4d4d4d;
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-top: 0px;
+	margin-bottom: 25px;
+}
+
+h4 {
+	color: #4d4d4d;
+	font-weight: bold;
+	font-size: 16px;
+	margin-top: 35px;
+	margin-bottom: 5px;
+}
+
+hr {
+	border: 1px solid #4d4d4d;
+	margin-top: 0px;
+}
+
+.btn-1 {
+	background-color: #27CEA7;
+}

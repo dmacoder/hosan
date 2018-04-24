@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+/* 나의 프로필 부분 */
+#row-body-my-profile {
+	margin-top: 100px;
+	background-color: #FAFAFA;
+	padding-top: 45px;
+	padding-bottom: 45px;
+}
+
+#profile-info {
+	border: 1px solid #E1E1E1;
+	background-color: white;
+	/* 	height: 450px; */
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 40px;
+}
+
+#profile-info>h4 {
+	color: #4d4d4d;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-top: 25px;
+	margin-bottom: 5px;
+}
+
+#profile-menu>h3 {
+	color: #4d4d4d;
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-top: 0px;
+	margin-bottom: 25px;
+}
+
+#profile-menu>a>p {
+	color: #8C8C8C;
+	font-weight: bold;
+	font-size: 1.1em;
+	margin-bottom: 20px;
+}
+
+table {
+	border-top: 2px solid #4d4d4d;
+	width: 100%;
+	height: 100%;
+}
+
+.profile-image {
+	border-radius: 50%;
+	width: 150px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	margin-left: 70px;
+	margin-right: 70px;
+}
+
+img {
+	border: 0;
+}
+
+.info-title {
+	color: #636363;
+	font-weight: bold;
+	font-size: 1em;
+}
+
+td>.form-control {
+	border-radius: 0px;
+	border: 1px solid #CFCFCF;
+}
+
+#av_time_to1, #av_time_to2 {
+	border-radius: 0px;
+	border: 1px solid #CFCFCF;
+	width: 100px;
+}
+
+.mini-title {
+	height: 60px;
+}
+
+.mini-title>td {
+	padding-top: 30px;
+}
+
+.edit{
+	float:right;
+}
+
+.myinfo-edit-btn{
+	text-align: right;
+}
+
+.myinfo-edit-btn>button{
+	margin-top: 20px;
+	height: 55px;
+	width: 420px;
+	color: #4d4d4d;
+	font-weight: bold;
+	background-color: #27CEA7;
+	font-size: 15px;
+}
+

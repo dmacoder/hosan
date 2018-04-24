@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+/* 마의 플랜 부분 */
+
+#body-bg{
+	background-color: #FAFAFA;
+}
+.container-body{
+	margin-top: 100px;
+	margin-bottom: 50px;
+}
+
+.myplan-title h2 b{
+	font-size: 20px;
+	color: #646664;
+	
+}
+
+.myplan-title{
+	margin-top: 40px;
+}
+
+#panel-body {
+	height: 515px;
+}
+
+#thumbnail {
+	border-radius: 5px;
+	margin-top: 15px;
+}
+
+#satisfaction {
+	display: inline-block;
+}
+
+.myplan-result {
+	display: inline;
+	float: right;
+}
+
+.header-margin-none {
+	margin-top: 15px;
+}
+
+.cursor{
+	margin-top: -15px;
+}
+
+.btn-sotitle{
+	font-size: 15px;
+	font-weight:bold;
+	color: #646664;
+	border: 0px;
+	margin-top: 10px;
+	margin-bottom: -10px;
+}
+
+.padding-myplan {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.height-good {
+	height: 70px;
+}
+
+#btn_client_ing:hover, #btn_client_ing:focus{
+	background-color: #F2DEDE;
+}
+
+#btn_client_check:hover, #btn_client_check:focus{
+	background-color: #FCF8E3;
+}
+
+#btn_engineer_ing:hover, #btn_engineer_ing:focus{
+	background-color: #DFF0D8;
+}
+
+#btn_engineer_check:hover, #btn_engineer_check:focus{
+	background-color: #D9EDF7;
+}
+
+.mylist-area{
+	height: 100%;
+	text-align: center;
+	background-color: white;
+}
+
+table>tbody>tr>td{
+	text-align: left;
+}
+
+.border-round{
+	padding: 20px;
+	height: 220px;
+	width: 100%;
+	border-radius: 10px;
+	
+}
+
+.user_id{
+	font-weight: bold;
+	color: #303030;
+}
+
+
+
+
+
+
+
+
+
+
+

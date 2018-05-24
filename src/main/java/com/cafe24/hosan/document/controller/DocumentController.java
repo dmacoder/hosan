@@ -227,7 +227,7 @@ public class DocumentController {
 		DocumentVO originVO = documentService.findById(document_srl);
 		DocumentVO modifyVO = null;	
 		String origin_id = originVO.getUser_id();
-		String user_id = ((MemberVO) session.getAttribute("loginUserInfo")).getUser_id();
+		String user_id = ((MemberVO) session.getAttribute("loginUserInfo")).getUserId();
 		
 		try {
 			if (session.getAttribute("loginUserInfo") == null) {
@@ -236,7 +236,7 @@ public class DocumentController {
 
 			} else {
 
-				if ((!user_id.equalsIgnoreCase(origin_id))&&!((MemberVO) session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("Y")) {
+				if ((!user_id.equalsIgnoreCase(origin_id))&&!((MemberVO) session.getAttribute("loginUserInfo")).getIsAdmin().equalsIgnoreCase("Y")) {
 					map.put("result", "fail");
 					map.put("errorMsg", "hasNotAuth");
 

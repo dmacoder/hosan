@@ -34,21 +34,21 @@
 							<li class="dropdown size-up">
 							<a class="dropdown-toggle margin-left-10" data-toggle="dropdown" href="javascript:void(0);">
 							<c:choose>
-								<c:when test="${loginUserInfo.profile_img_path==null}">
+								<c:when test="${loginUserInfo.profileImgPath==null}">
 									<img id="top_profile_Img" class="id-image" src="${pageContext.request.contextPath}/resources/images/main_user_gray.png"  />
 								</c:when>
 								<c:otherwise>
-									<img id="top_profile_Img" class="id-image" src="${pageContext.request.contextPath}/upload/displayFile?fileName=${loginUserInfo.profile_img_path}&directory=member/${loginUserInfo.member_srl}/profile"  />
+									<img id="top_profile_Img" class="id-image" src="${pageContext.request.contextPath}/upload/displayFile?fileName=${loginUserInfo.profileImgPath}&directory=member/${loginUserInfo.memberSrl}/profile"  />
 								</c:otherwise>
 							</c:choose>
-							<span class="text-uppercase">${loginUserInfo.user_id}님</span> <span class="caret"></span></a>
+							<span class="text-uppercase">${loginUserInfo.userId}님</span> <span class="caret"></span></a>
 								<ul class="dropdown-menu" id="dropdown-menu">
-									<c:if test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
+									<c:if test="${not empty loginUserInfo && loginUserInfo.isAdmin=='Y'}">
 										<li><a href="${pageContext.request.contextPath}/admin/">관리자페이지</a></li>
 									</c:if>
 									<li><a href="${pageContext.request.contextPath}/mypage/myplan">마이플랜</a></li>
 									<li><a href="${pageContext.request.contextPath}/message">쪽지함</a></li>
-									<li><a href="${pageContext.request.contextPath}/profile/${loginUserInfo.user_id}">프로필</a></li>
+									<li><a href="${pageContext.request.contextPath}/profile/${loginUserInfo.userId}">프로필</a></li>
 									<li><a href="${pageContext.request.contextPath}/member/myinfo">계정정보</a></li>
 									<li><a href="${pageContext.request.contextPath}/member/change_password">비밀번호 변경</a></li>
 									<li><a href="${pageContext.request.contextPath}/member/withdraw">회원탈퇴</a></li>

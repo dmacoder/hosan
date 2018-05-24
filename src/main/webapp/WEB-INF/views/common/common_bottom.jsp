@@ -10,7 +10,7 @@
 		
 		
 		
-		var login_user_id = '<c:out value="${loginUserInfo.user_id}"/>';
+		var login_user_id = '<c:out value="${loginUserInfo.userId}"/>';
 		
 		var searchPath = '<c:out value="${pageContext.request.contextPath}"/>'+'/board/service?searchType=i&keyword='+user_id;
 				
@@ -107,9 +107,6 @@
 <script src="${pageContext.request.contextPath}/resources/common/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <div class="container-fluid" style="background-color: white;">
 	<ul class="footer-menu">
-		<li><a href="${pageContext.request.contextPath}/about/ourplanners">기술자들 팀</a></li>ㅣ
-		<li><a href="${pageContext.request.contextPath}/about/recruit">인재채용</a></li>ㅣ
-		<li><a href="${pageContext.request.contextPath}/about/service">서비스소개</a></li>ㅣ
 		<li><a href="${pageContext.request.contextPath}/policy/provision">이용약관</a></li>ㅣ
 		<li><a href="${pageContext.request.contextPath}/policy/privacy">개인정보 취급방식</a></li>ㅣ
 		<li><a href="${pageContext.request.contextPath}/about/sitemap">사이트맵</a></li>ㅣ
@@ -125,7 +122,7 @@
 						<h4>
 							<a href="${pageContext.request.contextPath}/customercenter/notice" class="notice-title">공지사항</a>
 						</h4>
-						<div id="noticeBodyBottom">2018년 3월14일에 발표합니다. 준비하세요!</div>
+						<div id="noticeBodyBottom">안녕하세요? 호산 철학관 입니다.</div>
 
 					</div>
 					<div class="col-xs-2">
@@ -134,11 +131,10 @@
 				</div>
 			</div>
 			<div class="footer-waming">
-				<h5>Planners는 통신판매중개자이며 통신판매 당사자가 아닙니다. 따라서 서비스 관련 문의는 해당 전문가에게 해주시기 바랍니다.</h5>
-				<p>(주)플레너스의 사전 서면 동의 없이 플래너스 사이트의 일체의 정보, 콘텐츠 및 UI등을 상업적 목적으로 전재, 전송, 스크래핑 등 무단 사용할 수 없습니다.</p>
+				<p>(주)호산철학관의 사전 서면 동의 없이 사이트의 일체의 정보, 콘텐츠 및 UI등을 상업적 목적으로 전재, 전송, 스크래핑 등 무단 사용할 수 없습니다.</p>
 			</div>
 			<div class="footer-info">
-				<span><b>회사명:</b>(주)플레너스&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;</span> <span><b>주소:</b>서울시 금천구 코스모로 17길 41, 14층&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;</span> <span><b>대표:</b>전웅기&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;</span> <span><b>개인정보관리책임자:</b>박세창</span><br /> <span><b>사업자등록번호:</b>682-45-78541&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;</span> <span><b>전화번호:</b>1544-6524&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;</span> <span><b>이메일:</b>help@planners.com</span><br />
+				<span><b>상호명:</b>호산철학관&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;</span> <span><b>주소:</b>서울시 금천구 코스모로 17길 41, 14층&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;</span> <span><b>원장:</b>여여행&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;</span> <span><b>개인정보관리책임자:</b>박세창</span><br /> <span><b>사업자등록번호:</b>682-45-78541&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;</span> <span><b>전화번호:</b>1544-6524&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;</span> <span><b>이메일:</b>dmacoder@gmail.com</span><br />
 				<h6>Copyright &copy; 2018 OurPlanners Inc. All rights reserved</h6>
 			</div>
 		</div>

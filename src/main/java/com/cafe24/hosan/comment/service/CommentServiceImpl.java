@@ -97,7 +97,7 @@ public class CommentServiceImpl implements CommentService{
 		HttpSession session = req.getSession();
 		MemberVO memVO = (MemberVO)session.getAttribute("loginUserInfo");
 		CommentVO vo = new CommentVO();
-		String user_id = memVO.getUser_id();
+		String user_id = memVO.getUserId();
 		String comments = req.getParameter("comments");
 		int parent_board_srl = Integer.parseInt(req.getParameter("parent_board_srl"));
 		String comment_type = req.getParameter("comment_type");

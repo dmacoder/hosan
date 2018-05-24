@@ -10,15 +10,15 @@
 		<![CDATA[  
 			SELECT * FROM 
 				(SELECT Tb.*, rownum rNum FROM 
-					( SELECT * FROM op_board_comment where comment_srl > 0 
+					( SELECT * FROM hosan_document_comment where comment_srl > 0 
 					
 		]]>
 			<choose>
-			<when test="parent_board_srl == null or parent_board_srl == ''">
+			<when test="parent_document_srl == null or parent_document_srl == ''">
 
 			</when>
 			<otherwise>
-				AND parent_board_srl = #{parent_board_srl}
+				AND parent_document_srl = #{parent_document_srl}
 			</otherwise>
 			
 			
@@ -35,16 +35,6 @@
 
 		</choose>
 		
-		<choose>
-			<when test="comment_type == null or comment_type == ''">
-
-			</when>
-			<otherwise>
-				AND comment_type = #{comment_type}
-			</otherwise>
-
-		</choose>
-
 		<![CDATA[
   				ORDER BY comment_srl DESC ) Tb ) WHERE rNum Between #{pageStart} and #{pageEnd}
 		]]>
@@ -54,16 +44,16 @@
 	<select id="getTotalCount" resultType="Integer">
 	
 		<![CDATA[  
-			select count(*) from op_board_comment
+			select count(*) from hosan_document_comment
 			  where comment_srl > 0 
 		]]>
 		
 		<choose>
-			<when test="parent_board_srl == null or parent_board_srl == ''">
+			<when test="parent_document_srl == null or parent_document_srl == ''">
 
 			</when>
 			<otherwise>
-				AND parent_board_srl = #{parent_board_srl}
+				AND parent_document_srl = #{parent_document_srl}
 			</otherwise>
 		</choose>
 		
@@ -90,26 +80,26 @@
 	</select>
 	
 	<insert id="insertComment">
- 		insert into op_board_comment(comment_srl, parent_board_srl, user_id, comments,comment_type) 
-		values (op_board_comment_srl_seq.nextval, #{parent_board_srl}, #{user_id}, #{comments} ,#{comment_type}) 
+ 		insert into hosan_document_comment(comment_srl, parent_document_srl, user_id, comments,comment_type) 
+		values (hosan_document_comment_srl_seq.nextval, #{parent_document_srl}, #{user_id}, #{comments} ,#{comment_type}) 
  	</insert>
  	
  	<update id="updateComment">
-		update op_board_comment set comments = #{comments},
+		update hosan_document_comment set comments = #{comments},
 		last_update = sysdate
 		where comment_srl = #{comment_srl}
 	</update>
 
 	<delete id="deleteComment">
-		delete from op_board_comment where comment_srl =#{comment_srl}
+		delete from hosan_document_comment where comment_srl =#{comment_srl}
 	</delete>
 	
 	<select id="readComment">
-	select * from op_board_comment where comment_srl =#{comment_srl}
+	select * from hosan_document_comment where comment_srl =#{comment_srl}
 	</select>
  	
  	<select id="countComment">
- 	select count(*) from op_board_comment where parent_board_srl= #{parent_board_srl};
+ 	select count(*) from hosan_document_comment where parent_document_srl= #{parent_document_srl};
  	</select>
 	
 </mapper>

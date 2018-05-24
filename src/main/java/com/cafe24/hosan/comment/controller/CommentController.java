@@ -149,7 +149,7 @@ public class CommentController {
 		// 사용자 아이디를 저장후
 		String origin_id = originVO.getUser_id();
 		// 세션 아이디와 비교
-		String user_id = ((MemberVO) session.getAttribute("loginUserInfo")).getUser_id();
+		String user_id = ((MemberVO) session.getAttribute("loginUserInfo")).getUserId();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		ResponseEntity<Map<String, Object>> entity = null;
@@ -161,7 +161,7 @@ public class CommentController {
 
 			} else {
 
-				if ((!user_id.equalsIgnoreCase(origin_id))&&!((MemberVO) session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("Y")) {
+				if ((!user_id.equalsIgnoreCase(origin_id))&&!((MemberVO) session.getAttribute("loginUserInfo")).getIsAdmin().equalsIgnoreCase("Y")) {
 					map.put("result", "fail");
 					map.put("errorMsg", "hasNotAuth");
 
@@ -208,7 +208,7 @@ public class CommentController {
 		// 사용자 아이디를 저장후
 		String origin_id = originVO.getUser_id();
 		// 세션 아이디와 비교
-		String user_id = ((MemberVO) session.getAttribute("loginUserInfo")).getUser_id();
+		String user_id = ((MemberVO) session.getAttribute("loginUserInfo")).getUserId();
 		
 		
 		try {
@@ -217,7 +217,7 @@ public class CommentController {
 				map.put("errorMsg", "isNotLogin");
 			} else {
 
-				if ((!user_id.equalsIgnoreCase(origin_id))&&!((MemberVO) session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("Y")) {
+				if ((!user_id.equalsIgnoreCase(origin_id))&&!((MemberVO) session.getAttribute("loginUserInfo")).getIsAdmin().equalsIgnoreCase("Y")) {
 					map.put("result", "fail");
 					map.put("errorMsg", "hasNotAuth");
 

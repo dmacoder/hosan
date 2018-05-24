@@ -117,7 +117,7 @@ public class MemberDAOImpl implements MemberDAO{
 		//MemberDAO dao = sqlSession.getMapper(MemberDAO.class);
 		//return dao.confirmIdPassword(dto);
 		
-		System.out.println("아이디 : " + dto.getUser_id());
+		System.out.println("아이디 : " + dto.getUserId());
 		System.out.println("비번 : " + dto.getPassword());
 		return sqlSession.selectOne(namespace+".confirmIdPassword", dto);
 		

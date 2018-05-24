@@ -28,14 +28,12 @@
 	
 	<insert id="insert" parameterType="com.cafe24.hosan.member.domain.MemberVO">
  		
- 		insert into hosan_member (member_srl,member_type,user_id,email_address,password,salt,email_id,email_host,user_name,
-find_account_question,find_account_answer,birthday,allow_mailing,allow_message,gender,address,mobile,
-career,career_history,license_date,license_provider,license_description,
-company_name,company_number,regdate,denied,limit_date,is_admin,change_password_date,profile_img_path,member_grade,last_login)
-values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{password},#{salt},#{email_id},#{email_host},#{user_name},
-#{find_account_question},#{find_account_answer},#{birthday},#{allow_mailing},#{allow_message},#{gender},#{address},#{mobile},
-#{career,jdbcType=VARCHAR},#{career_history,jdbcType=VARCHAR},#{license_date,jdbcType=VARCHAR},#{license_provider,jdbcType=VARCHAR},#{license_description,jdbcType=VARCHAR},
-#{company_name,jdbcType=VARCHAR},#{company_number,jdbcType=VARCHAR},#{regdate},#{denied},#{limit_date,jdbcType=DATE},#{is_admin},#{change_password_date},#{profile_img_path,jdbcType=VARCHAR},#{member_grade},#{last_login})
+ 		insert into hosan_member (member_srl,user_id,email_address,password,salt,email_id,email_host,user_name,nick_name
+find_account_question,find_account_answer,birthday,allow_mailing,allow_message,gender,zonecode,address,address2,sido,sigungu,mobile,
+regdate,denied,limit_date,is_admin,change_password_date,profile_img_path,member_grade,last_login)
+values (member_srl_seq.nextval,#{userId},#{emailAddress},#{password},#{salt},#{emailId},#{emailHost},#{userName},#{nickName},
+#{findAccountQuestion},#{findAccountAnswer},#{birthday},#{allowMailing},#{allowMessage},#{gender},#{zonecode},#{address},#{address2},#{sido},#{sigungu},#{mobile},
+#{regdate},#{denied},#{limitDate,jdbcType=DATE},#{isAdmin},#{changePasswordDate},#{profileImgPath,jdbcType=VARCHAR},#{memberGrade},#{lastLogin})
  		
  	</insert>
  	
@@ -50,11 +48,11 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
  	
  	<!-- 아이디 찾기시 (이름과 이메일로)-->
  	<select id="hasIdByNameAndEmail" resultType="Integer">
- 	select count(*) from hosan_member where user_name=#{user_name} and email_address=#{email_address}
+ 	select count(*) from hosan_member where user_name=#{userName} and email_address=#{emailAddress}
  	</select>
  	
- 	<select id="login" resultType="com.cafe24.hosan.member.domain.MemberVO">
- 		select * from hosan_member where user_id=#{user_id} and password=#{password}
+ 	<select id="login" resultType="MemberVO">
+ 		select * from hosan_member where user_id=#{userId} and password=#{password}
  	</select>
  	
  	<!-- 로그인 유지 -->
@@ -62,7 +60,7 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
 	update hosan_member
 	set session_key = #{sessionKey}
 	   ,session_limit = #{next}
-	where member_srl = #{member_srl}
+	where member_srl = #{memberSrl}
 	</update>
 	
  	<!-- 세션키 체크 -->
@@ -112,7 +110,7 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
 
 	<select id="confirmIdPassword" resultType="Integer" parameterType="com.cafe24.hosan.member.dto.LoginDTO">
 		
-		select count(*) from hosan_member where user_id=#{user_id} and password=#{password}
+		select count(*) from hosan_member where user_id=#{userId} and password=#{password}
 		
 	</select>
 	

@@ -1545,7 +1545,7 @@ body{
 
 	<!-- 이미지 프리로더,우측 사이드바 필요한 부분 -->
 
-	<script src="${pageContext.request.contextPath}/resources/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+	<script src="${pageContext.request.contextPath}/resources/common/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 </div>
 </body>
 </html>

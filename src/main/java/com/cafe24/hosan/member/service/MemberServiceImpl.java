@@ -35,23 +35,23 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void saveMember(HttpServletRequest req, Model model) {
 
-		String member_type = req.getParameter("member_type") == null ? "P" : req.getParameter("member_type");
+		String userId = req.getParameter("user_id");
 
-		String user_id = req.getParameter("user_id");
-
-		String email_address = req.getParameter("email_address");
+		String emailAddress = req.getParameter("email_address");
 
 		String password = req.getParameter("password");
 
-		String email_id = req.getParameter("email_id");
+		String emailId = req.getParameter("email_id");
 
-		String email_host = req.getParameter("email_host");
+		String emailHost = req.getParameter("email_host");
 
-		String user_name = req.getParameter("user_name");
+		String userName = req.getParameter("user_name");
 
-		int find_account_question = Integer.parseInt(req.getParameter("find_account_question"));
+		String nickName = req.getParameter("nick_name");
+		
+		int findAccountQuestion = Integer.parseInt(req.getParameter("find_account_question"));
 
-		String find_account_answer = req.getParameter("find_account_answer");
+		String findAccountAnswer = req.getParameter("find_account_answer");
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String strBirthday = req.getParameter("birthday");
@@ -67,54 +67,52 @@ public class MemberServiceImpl implements MemberService {
 
 		java.sql.Date sqlBirthday = new java.sql.Date(utilDate.getTime());
 
-		String allow_mailing = req.getParameter("allow_mailing");
-		String allow_message = req.getParameter("allow_message");
+		String allowMailing = req.getParameter("allow_mailing");
+		String allowMessage = req.getParameter("allow_message");
 
 		String gender = req.getParameter("gender");
 
+		String zonecode = req.getParameter("zonecode");
+		
 		String address = req.getParameter("address");
+		
+		String address2 = req.getParameter("address2");
 
+		
+
+		String sido = req.getParameter("sido");
+		
+		String sigungu = req.getParameter("sigungu");
+		
 		String mobile = req.getParameter("mobile");
-
-		String career = req.getParameter("career");
-
-		String career_history = req.getParameter("career_history");
-
-		String license_date = req.getParameter("license_date");
-
-		String license_provider = req.getParameter("license_provider");
-
-		String license_description = req.getParameter("license_description");
-
-		String company_name = req.getParameter("company_name");
-
-		String company_number = req.getParameter("company_number");
 
 		utilDate = new java.util.Date();
 		java.sql.Date today = new java.sql.Date(utilDate.getTime());
 
 		String denied = "N";
 
-		java.sql.Date limit_date = null;
+		java.sql.Date limitDate = null;
 
-		String is_admin = req.getParameter("is_admin") == null ? "N" : req.getParameter("is_admin");
+		String isAdmin = req.getParameter("is_admin") == null ? "N" : req.getParameter("is_admin");
 
-		java.sql.Date change_password_date = today;
+		java.sql.Date changePasswordDate = today;
 
-		String profile_img_path = req.getParameter("profile_img_path");
+		String profileImgPath = req.getParameter("profile_img_path");
 
-		String member_grade = "E";
+		String memberGrade = "E";
 
-		java.sql.Date last_login = today;
+		java.sql.Date lastLogin = today;
+		
+		java.sql.Date regdate = today;
 
 		// 비밀번호 암호화
 		String salt = SHA256.generateSalt();
 
-		MemberVO joinInfo = new MemberVO(member_type, user_id, email_address, password, salt, email_id, email_host,
-				user_name, find_account_question, find_account_answer, sqlBirthday, allow_mailing, allow_message,
-				gender, address, mobile, career, career_history, license_date, license_provider, license_description,
-				company_name, company_number, today, denied, limit_date, is_admin, change_password_date,
-				profile_img_path, member_grade, last_login);
+
+		
+		MemberVO joinInfo = new MemberVO(userId, emailAddress, password, salt, emailId, emailHost, userName, nickName,
+				findAccountQuestion, findAccountAnswer, sqlBirthday, gender, allowMailing, allowMessage, denied, limitDate,
+				regdate, zonecode, address, address2, sido, sigungu, mobile, lastLogin, changePasswordDate, isAdmin, profileImgPath, memberGrade);
 
 		String newPassword = SHA256.encrypt(joinInfo.getPassword(), salt);
 
@@ -205,7 +203,7 @@ public class MemberServiceImpl implements MemberService {
 		} else {
 			// 아이디 찾기시 인증키 확인
 			MemberVO vo = dao.getUserInfoByEmail(email);
-			user_id = vo.getUser_id();
+			user_id = vo.getUserId();
 
 			result = dao.isValidAuthKeyWithoutPassword(user_id, auth_key);
 
@@ -252,13 +250,13 @@ public class MemberServiceImpl implements MemberService {
 
 		int hasId = 0;
 
-		hasId = dao.hasId(dto.getUser_id());
+		hasId = dao.hasId(dto.getUserId());
 
 		if (hasId <= 0) {
 			model.addAttribute("ERROR_MSG", "입력한 아이디가 존재하지 않습니다. 아이디를 다시 한번 입력해 주세요.");
 		} else {
 
-			String memberSalt = dao.getSaltById(dto.getUser_id());
+			String memberSalt = dao.getSaltById(dto.getUserId());
 
 			String encPassword = SHA256.encrypt(dto.getPassword(), memberSalt);
 
@@ -279,7 +277,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updatePassword(Model model, HttpServletRequest req, HttpSession session) {
 
-		String user_id = ((MemberVO) session.getAttribute("loginUserInfo")).getUser_id();
+		String user_id = ((MemberVO) session.getAttribute("loginUserInfo")).getUserId();
 		String password = req.getParameter("password");
 		String newPassword = req.getParameter("newPassword");
 
@@ -309,10 +307,10 @@ public class MemberServiceImpl implements MemberService {
 
 		LoginDTO dto = new LoginDTO();
 
-		String user_id = ((MemberVO) session.getAttribute("loginUserInfo")).getUser_id();
+		String user_id = ((MemberVO) session.getAttribute("loginUserInfo")).getUserId();
 		String password = req.getParameter("password");
 
-		dto.setUser_id(user_id);
+		dto.setUserId(user_id);
 
 		String salt = dao.getSaltById(user_id);
 
@@ -485,7 +483,7 @@ public class MemberServiceImpl implements MemberService {
 		Object obj = session.getAttribute("loginUserInfo");
 
 		MemberVO loginVO = (MemberVO) obj;
-		String user_id = loginVO.getUser_id();
+		String user_id = loginVO.getUserId();
 
 		if (action == null || action.length() == 0 || action.equalsIgnoreCase("view")) {
 
@@ -501,7 +499,7 @@ public class MemberServiceImpl implements MemberService {
 
 			String password = (String) req.getParameter("password");
 			LoginDTO dto = new LoginDTO();
-			dto.setUser_id(user_id);
+			dto.setUserId(user_id);
 
 			String salt = dao.getSaltById(user_id);
 
@@ -545,7 +543,7 @@ public class MemberServiceImpl implements MemberService {
 			if (modify_id == null || modify_id.length() == 0) {
 				userInfo = dao.getUserInfoById(user_id);
 			} else {
-				if (loginVO.getIs_admin().equalsIgnoreCase("Y")) {
+				if (loginVO.getIsAdmin().equalsIgnoreCase("Y")) {
 					userInfo = dao.getUserInfoById(modify_id);
 				} else {
 					// 수정 모드는 관리자만 가능합니다!
@@ -595,10 +593,10 @@ public class MemberServiceImpl implements MemberService {
 			String allow_message = req.getParameter("allow_message");
 
 			
-			userInfo.setUser_name(user_name);
+			userInfo.setUserName(user_name);
 			userInfo.setGender(gender);
-			userInfo.setFind_account_question(find_account_question);
-			userInfo.setFind_account_answer(find_account_answer);
+			userInfo.setFindAccountQuestion(find_account_question);
+			userInfo.setFindAccountAnswer(find_account_answer);
 
 			userInfo.setBirthday(sqlBirthday);
 
@@ -608,8 +606,8 @@ public class MemberServiceImpl implements MemberService {
 			//String profile_img_path = req.getParameter("profile_img_path");
 			//userInfo.setProfile_img_path(profile_img_path);
 
-			userInfo.setAllow_mailing(allow_mailing);
-			userInfo.setAllow_message(allow_message);
+			userInfo.setAllowMailing(allow_mailing);
+			userInfo.setAllowMessage(allow_message);
 
 			// 업데이트 실행
 			int affected = dao.updateMyInfo(userInfo);
@@ -621,8 +619,8 @@ public class MemberServiceImpl implements MemberService {
 			} else {
 				// 성공한 경우 변경한 내용으로 로그인 정보도 변경
 				System.out.println("로그인 : " + user_id);
-				System.out.println("수정id : " + userInfo.getUser_id());
-				if (user_id.equalsIgnoreCase(userInfo.getUser_id())) {
+				System.out.println("수정id : " + userInfo.getUserId());
+				if (user_id.equalsIgnoreCase(userInfo.getUserId())) {
 					System.out.println("로그인 계정 = 수정계정 동일 계정 수정");
 					session.setAttribute("loginUserInfo", userInfo);
 				}

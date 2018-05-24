@@ -97,11 +97,11 @@ public class MemberRestController {
 		SearchMemberCriteria scri = new SearchMemberCriteria();
 
 		if (member_srl != null && member_srl != 0)
-		scri.setMember_srl(member_srl);
+		scri.setMemberSrl(member_srl);
 		
-		scri.setUser_id(user_id);
-		scri.setUser_name(user_name);
-		scri.setEmail_address(email_address);
+		scri.setUserId(user_id);
+		scri.setUserName(user_name);
+		scri.setEmailAddress(email_address);
 		
 		scri.setPage(nowPage);
 		scri.setPageSize(pageSize);

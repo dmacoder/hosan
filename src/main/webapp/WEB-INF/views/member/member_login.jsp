@@ -131,7 +131,7 @@ body{
 								<div class="input-group">
 									<span class="input-group-addon"><i
 										class="glyphicon glyphicon-user"></i></span><input type="text"
-										class="form-control" name="user_id" placeholder="아이디">
+										class="form-control" name="userId" placeholder="아이디">
 								</div>
 								<label>비밀번호</label>
 								<div class="input-group">
@@ -169,11 +169,11 @@ body{
 				<table border="1" style="width: 300px">
 					<tr>
 						<td>아이디</td>
-						<td>${sessionScope.loginUserInfo.user_id }</td>
+						<td>${sessionScope.loginUserInfo.userId }</td>
 					</tr>
 					<tr>
 						<td>이름</td>
-						<td>${sessionScope.loginUserInfo.user_name }</td>
+						<td>${sessionScope.loginUserInfo.userName }</td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><input type="button"
@@ -190,7 +190,7 @@ body{
 	<!-- 모달창 -->
 	<%@ include file="/WEB-INF/views/common/modal_msg.jsp"%>
 
-	<script src="${pageContext.request.contextPath}/resources/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+	<script src="${pageContext.request.contextPath}/resources/common/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 </div>
 </body>
 </html>

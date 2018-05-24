@@ -108,7 +108,7 @@ public class MemberController {
 
 		MemberVO memVO = (MemberVO) obj;
 
-		String uploadPath = request.getSession().getServletContext().getRealPath("resources/upload/member/" + memVO.getMember_srl() + "/profile");
+		String uploadPath = request.getSession().getServletContext().getRealPath("resources/upload/member/" + memVO.getMemberSrl() + "/profile");
 		
 		ResponseEntity<String> imgPath = new ResponseEntity<String>(
 				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
@@ -118,7 +118,7 @@ public class MemberController {
 		System.out.println("이미지 업로드 file path: "+memberPicture);
 		logger.info(memberPicture);
 
-		memVO.setProfile_img_path(memberPicture);
+		memVO.setProfileImgPath(memberPicture);
 		try {
 			service.uploadPicture(memVO);
 			System.out.println("업로드 완료");
@@ -243,7 +243,8 @@ public class MemberController {
 	public void login(LoginDTO dto, HttpServletRequest req, HttpSession session, Model model) throws Exception {
 
 		String redirect_url = (String) session.getAttribute("prev_url");
-
+		System.out.println(dto.getUserId());
+		System.out.println(dto.getPassword());
 		MemberVO vo = service.login(dto, model);
 
 		try {
@@ -254,7 +255,7 @@ public class MemberController {
 
 			model.addAttribute("loginUserInfo", vo);
 
-			System.out.println("로그인된 아이디 : " + vo.getUser_id());
+			System.out.println("로그인된 아이디 : " + vo.getUserId());
 
 			// session.setAttribute("loginUserInfo", vo);
 		} catch (Exception e) {
@@ -269,7 +270,7 @@ public class MemberController {
 
 			Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
 
-			service.keepLogin(vo.getMember_srl(), session.getId(), sessionLimit);
+			service.keepLogin(vo.getMemberSrl(), session.getId(), sessionLimit);
 
 		}
 
@@ -298,7 +299,7 @@ public class MemberController {
 				loginCookie.setPath("/");
 				loginCookie.setMaxAge(0);
 				resp.addCookie(loginCookie);
-				service.keepLogin(vo.getMember_srl(), session.getId(), new Date());
+				service.keepLogin(vo.getMemberSrl(), session.getId(), new Date());
 			}
 		}
 
@@ -325,7 +326,7 @@ public class MemberController {
 			Object obj = session.getAttribute("loginUserInfo");
 			
 			MemberVO memVO = (MemberVO) obj;
-			String user_id = memVO.getUser_id();
+			String user_id = memVO.getUserId();
 			
 			
 			if (action == null || action.length() == 0 || action.equalsIgnoreCase("view")) {
@@ -336,7 +337,7 @@ public class MemberController {
 			else if (action.equalsIgnoreCase("modifyAdmin")) {
 				
 				//현재 접속된 계정의 아이디가 관리자인지 확인하고..
-				if(!memVO.getIs_admin().equalsIgnoreCase("Y"))
+				if(!memVO.getIsAdmin().equalsIgnoreCase("Y"))
 				{
 					// 비밀번호 다른경우 에러메시지와 함께 다시 비밀번호 확인창으로 뷰 이동
 					// 에러 메시지 맵
@@ -425,7 +426,7 @@ public class MemberController {
 		Object obj = session.getAttribute("loginUserInfo");
 
 		MemberVO emailInfo = (MemberVO) obj;
-		String user_id = emailInfo.getUser_id();
+		String user_id = emailInfo.getUserId();
 		
 		String action = req.getParameter("action");
 		if(action==null || action.length()==0 || action.equals("form"))
@@ -434,7 +435,7 @@ public class MemberController {
 			
 			
 			
-			System.out.println(emailInfo.getUser_id());
+			System.out.println(emailInfo.getUserId());
 			System.out.println(emailInfo.getPassword());
 			
 			model.addAttribute("emailInfo", emailInfo);

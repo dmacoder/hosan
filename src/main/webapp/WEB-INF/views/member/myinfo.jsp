@@ -39,7 +39,7 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
-<script src="${pageContext.request.contextPath}/resources/js/myinfo.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script src="${pageContext.request.contextPath}/resources/common/js/myinfo.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
 
 </head>
@@ -80,9 +80,9 @@
 
 									<c:choose>
 
-										<c:when test="${not empty loginUserInfo.profile_img_path}">
+										<c:when test="${not empty loginUserInfo.profileImgPath}">
 
-											<img src="${pageContext.request.contextPath}/upload/displayFile?fileName=${loginUserInfo.profile_img_path}&directory=member/${loginUserInfo.member_srl}/profile" id="profile_Img" class="profile-image" />
+											<img src="${pageContext.request.contextPath}/upload/displayFile?fileName=${loginUserInfo.profileImgPath}&directory=member/${loginUserInfo.memberSrl}/profile" id="profile_Img" class="profile-image" />
 
 										</c:when>
 
@@ -105,7 +105,7 @@
 							</tr>
 							<tr>
 								<td colspan="4">
-									<input type="text" class="form-control" placeholder="${loginUserInfo.user_id}" disabled="disabled" />
+									<input type="text" class="form-control" placeholder="${loginUserInfo.userId}" disabled="disabled" />
 								</td>
 							</tr>
 							<tr class="mini-title">
@@ -123,7 +123,7 @@
 							</tr>
 							<tr>
 								<td colspan="4">
-									<input type="text" class="form-control" placeholder="${loginUserInfo.user_name}" disabled="disabled" />
+									<input type="text" class="form-control" placeholder="${loginUserInfo.userName}" disabled="disabled" />
 								</td>
 							</tr>
 							<tr class="mini-title">
@@ -153,14 +153,14 @@
 							</tr>
 							<tr>
 								<td colspan="4">
-									<input type="text" class="form-control" placeholder="${loginUserInfo.email_address}" disabled="disabled" />
+									<input type="text" class="form-control" placeholder="${loginUserInfo.emailAddress}" disabled="disabled" />
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2">이메일수신동의 거부 시에도 기본서비스(주문배송 메일)는 발송됩니다.</td>
 								<td colspan="2" style="float: right;">
 									<c:choose>
-										<c:when test="${loginUserInfo.allow_mailing == 'Y' }">
+										<c:when test="${loginUserInfo.allowMailing == 'Y' }">
 											<label><input type="radio" name="allow_mailing" value="Y" checked="checked" disabled="disabled" /> 예 </label>&nbsp;&nbsp;
 									<label><input type="radio" name="allow_mailing" value="N" disabled="disabled" /> 아니오</label>
 										</c:when>
@@ -185,7 +185,7 @@
 								<td colspan="2">메시지수신동의 시에 기본서비스(할인혜택과 이벤트 등의 소식 안내)를 받아보실수 있습니다.</td>
 								<td colspan="2" style="float: right;">
 									<c:choose>
-										<c:when test="${loginUserInfo.allow_message == 'Y' }">
+										<c:when test="${loginUserInfo.allowMessage == 'Y' }">
 											<label><input type="radio" name="allow_message" value="Y" checked="checked" disabled="disabled" /> 예</label>&nbsp;&nbsp;
 									<label><input type="radio" name="allow_message" value="N" disabled="disabled" /> 아니오</label>
 										</c:when>

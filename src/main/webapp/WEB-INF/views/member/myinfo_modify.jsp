@@ -51,7 +51,7 @@
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<script src="${pageContext.request.contextPath}/resources/js/myinfo.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script src="${pageContext.request.contextPath}/resources/common/js/myinfo.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <script>
 $(document).ready(function(){
 	
@@ -360,7 +360,7 @@ function isNumeric(num, opt){
 
 	<c:choose>
 
-		<c:when test="${empty userInfo || (loginUserInfo.is_admin!='Y' && isMatchedPass!='Y')}">
+		<c:when test="${empty userInfo || (loginUserInfo.isAdmin!='Y' && isMatchedPass!='Y')}">
 
 			<script>
 			alert("저장된값 없어요.");
@@ -422,9 +422,9 @@ function isNumeric(num, opt){
 
 									<c:choose>
 
-										<c:when test="${not empty loginUserInfo.profile_img_path}">
+										<c:when test="${not empty loginUserInfo.profileImgPath}">
 
-											<img src="${pageContext.request.contextPath}/upload/displayFile?fileName=${loginUserInfo.profile_img_path}&directory=member/${loginUserInfo.member_srl}/profile" id="profile_Img" class="profile-image" />
+											<img src="${pageContext.request.contextPath}/upload/displayFile?fileName=${loginUserInfo.profileImgPath}&directory=member/${loginUserInfo.memberSrl}/profile" id="profile_Img" class="profile-image" />
 
 										</c:when>
 
